@@ -1,0 +1,44 @@
+<!DOCTYPE html metal:define-macro="_layout">
+<html lang="${req.locale_name}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <title metal:define-slot="title"
+           tal:content="context.title | python:None"></title>
+    <link rel="shortcut icon" type="image/x-icon" href="${req.util.static_url('favicon.ico')}">
+    <link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48 64x64 96x96 128x128 192x192" href="${req.util.static_url('favicon.ico')}">
+    <link rel="icon" type="image/png" sizes="192x192" href="${req.util.static_url('img/favicon-192.png')}">
+    <link rel="icon" type="image/png" sizes="128x128" href="${req.util.static_url('img/favicon-128.png')}">
+    <link rel="icon" type="image/png" sizes="96x96" href="${req.util.static_url('img/favicon-96.png')}">
+    <link rel="icon" type="image/png" sizes="64x64" href="${req.util.static_url('img/favicon-64.png')}">
+    <link rel="icon" type="image/png" sizes="48x48" href="${req.util.static_url('img/favicon-48.png')}">
+    <link rel="icon" type="image/png" sizes="32x32" href="${req.util.static_url('img/favicon-32.png')}">
+    <link rel="icon" type="image/png" sizes="16x16" href="${req.util.static_url('img/favicon-16.png')}">
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="${req.util.static_url('img/touch-icon-180.png')}">
+    <link rel="apple-touch-icon" type="image/png" sizes="167x167" href="${req.util.static_url('img/touch-icon-167.png')}">
+    <link rel="apple-touch-icon" type="image/png" sizes="152x152" href="${req.util.static_url('img/touch-icon-152.png')}">
+    <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="${req.util.static_url('img/touch-icon-120.png')}">
+    <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="${req.util.static_url('img/touch-icon-76.png')}">
+    <link rel="apple-touch-icon" type="image/png" sizes="57x57" href="${req.util.static_url('img/touch-icon-57.png')}">
+    <link rel="humans" type="text/plain" href="/humans.txt">
+    <link rel="robots" type="text/plain" href="/robots.txt">
+    <style>html{background-color:#454545;}</style>
+    <style>.not-ready{visibility: hidden;}</style>
+    <link rel="stylesheet" href="${util.hashed_asset_url('index.css')}">
+    <script><tal metal:use-macro="load: ../assets/_fouc.js" /></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300|Roboto+Slab:300" rel="stylesheet">
+  </head>
+  <body id="carrell">
+    <div class="wrapper sidebar-container">
+      <main>
+        <div metal:define-slot="content"></div>
+      </main>
+    </div>
+
+    <script src="${util.hashed_asset_url('index.js')}" charset="utf-8" async></script>
+  </body>
+</html>

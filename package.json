@@ -1,0 +1,30 @@
+{
+  "name": "rapperswil-jona",
+  "version": "0.0.1",
+  "description": "https://scrolliris.com/",
+  "private": true,
+  "engines": {
+    "node": "8.11.4",
+    "npm": "6.4.2"
+  },
+  "scripts": {
+    "test": "node --version",
+    "postinstall": "rollup -c"
+  },
+  "dependencies": {
+    "styr": "0.0.32"
+  },
+  "devDependencies": {
+    "rollup": "^0.65.2",
+    "rollup-plugin-buble": "0.19.2",
+    "rollup-plugin-commonjs": "9.1.6",
+    "rollup-plugin-node-builtins": "2.1.2",
+    "rollup-plugin-node-globals": "1.4.0",
+    "rollup-plugin-node-resolve": "3.4.0",
+    "rollup-plugin-replace": "2.0.0",
+    "rollup-plugin-terser": "2.0.2"
+  },
+  "cacheDirectories": [
+    "node_modules"
+  ]
+}

@@ -1,0 +1,16 @@
+/* TEAM */
+Name: Yasuhiro Asaka
+Role: Programmer
+Mail: yasuhiro.asaka@lupine-software.com
+
+Name: Misaki Asaka
+Role: Designer
+Mail: misaki.asaka@lupine-software.com
+
+/* SITE */
+Last update: 2018/09/25
+Language: English
+Doctype: HTML5
+URL: https://scrolliris.com/
+Source Code: https://gitlab.com/scrolliris/scrolliris-carrell
+License: GNU Affero General Public License (AGPL)

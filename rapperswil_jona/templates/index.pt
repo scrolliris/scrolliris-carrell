@@ -1,0 +1,4 @@
+<div metal:use-macro="load: _layout.pt">
+  <title metal:fill-slot="title">Scrolliris</title>
+  <div metal:fill-slot="content"></div>
+</div>
