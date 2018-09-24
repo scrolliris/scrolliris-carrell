@@ -92,9 +92,17 @@ vet\:style:  ## Check style using py{code,doc}style (see setup.cfg)
 	pydocstyle test ${app}
 .PHONY: vet\:style
 
-vet\:lint:  ## Lint python codes
-	pylint test ${app}
+vet\:lint: | vet\:lint\:py vet\:lint\:js  ## Lint Python and JavaScript codes at once
 .PHONY: vet\:lint
+
+vet\:lint\:py:  ## Lint Python codes
+	pylint test ${app}
+.PHONY: vet\:lint\:py
+
+vet\:lint\:js:  ## Lint JavaScript codes
+	eslint rollup.config.js
+	eslint ${app}/assets
+.PHONY: vet\:lint\:js
 
 
 # -- utilities
