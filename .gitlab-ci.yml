@@ -28,7 +28,7 @@ style:
 
 lint:python:
   stage: vet
-  image: python:3.6.6
+  image: python:3.6
   variables:
     PIP_CACHE_DIR: pip-cache
   before_script:
@@ -94,7 +94,7 @@ pack:
 
 test:
   stage: test
-  image: python:3.6.6
+  image: python:3.6
   variables:
     ENV: test
     PIP_CACHE_DIR: pip-cache
