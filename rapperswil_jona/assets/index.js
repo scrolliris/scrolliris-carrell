@@ -1,21 +1,20 @@
 // vendor components
-require('styr.css');
+import 'styr';
 
 // application styles
-require('./css/style.styl');
-require('./css/layout.styl');
-require('./css/typography.styl');
+import './css/layout.styl';
+import './css/style.styl';
+import './css/typography.styl';
 
-
-var FontFaceObserver = require('fontfaceobserver.js');
-var font;
+import FontFaceObserver from 'fontfaceobserver';
+let font;
 
 font = new FontFaceObserver('Roboto Slab');
-font.load().then(function() {
+font.load().then(() => {
   document.body.classList.add('slab-loaded');
 });
 
 font = new FontFaceObserver('Open Sans');
-font.load().then(function() {
+font.load().then(() => {
   document.body.classList.add('sans-loaded');
 });
