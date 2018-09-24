@@ -77,7 +77,7 @@ test\:doc:  ## Run doctest in Python code
 
 test\:coverage:  ## Run `test` with coverage outputs
 	ENV=test py.test -c 'config/testing.ini' -s -q \
-	  test/unit test/func \
+	  test/unit test/func test/route_test.py \
 	  --cov=${app} --cov-report term-missing:skip-covered
 .PHONY: test\:coverage
 

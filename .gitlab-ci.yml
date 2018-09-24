@@ -1,0 +1,112 @@
+# https://docs.gitlab.com/ce/ci/yaml/
+stages:
+  - vet
+  - build
+  - test
+  - quality
+
+style:
+  stage: vet
+  image: python:3.6
+  variables:
+    ENV: development
+    PIP_CACHE_DIR: pip-cache
+  before_script:
+    - pip install --upgrade pip setuptools
+    - python --version
+    - pip --version
+    - pip install pycodestyle pydocstyle -c constraints.txt
+    - make clean
+  script:
+    - make vet:style
+  cache:
+    untracked: true
+    paths:
+      - pip-cache
+  except:
+    - tags
+
+lint:
+  stage: vet
+  image: python:3.6.6
+  variables:
+    PIP_CACHE_DIR: pip-cache
+  before_script:
+    - pip install --upgrade pip setuptools
+    - python --version
+    - pip --version
+    - ENV=development make setup
+    - ENV=test make setup
+    - ENV=production make setup
+  script:
+    - make vet:lint
+  cache:
+    untracked: true
+    paths:
+      - pip-cache
+  except:
+    - tags
+
+pack:
+  stage: build
+  image: node:8.11.4
+  variables:
+    NODE_ENV: production
+  before_script:
+    - node --version
+    - npm install --global npm@6.4.1
+    - npm --version
+    - npm install --global gulp-cli
+    - gulp --version
+    - npm install --only=dev
+    - npm install --ignore-scripts
+  script:
+    - make pack
+  cache:
+    paths:
+      - node_modules
+  artifacts:
+    paths:
+      - static
+  except:
+    - tags
+
+test:
+  stage: test
+  image: python:3.6.6
+  variables:
+    ENV: test
+    PIP_CACHE_DIR: pip-cache
+  before_script:
+    - pip install --upgrade pip setuptools
+    - python --version
+    - pip --version
+    - make setup
+  script:
+    - make test:coverage
+  cache:
+    paths:
+      - pip-cache
+  artifacts:
+    paths:
+      - .coverage
+  except:
+    - tags
+
+code_quality:
+  stage: quality
+  image: docker:stable
+  services:
+    - docker:stable-dind
+  variables:
+    DOCKER_DRIVER: overlay2
+  allow_failure: true
+  script:
+    - export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')
+    - docker run
+      --env SOURCE_CODE="$PWD"
+      --volume "$PWD":/code
+      --volume /var/run/docker.sock:/var/run/docker.sock
+      "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
+  artifacts:
+    paths: [gl-code-quality-report.json]
